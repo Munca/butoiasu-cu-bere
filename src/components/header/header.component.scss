@@ -1,13 +1,28 @@
-nav {
+    .infoTop {
+    display: flex;
+    justify-content:space-evenly;
+    background-color: gray;
+}
+
+.infoTop h4 {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.infoTop span {
+    color: brown;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 10%;
     background-color: black;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    height: 100px;
+    z-index: 9999;
 }
 
 .link {

@@ -1,0 +1,18 @@
+.infoPagina {
+    padding-left: 20%;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.312);
+    align-items: center;
+    height: 50px;
+    
+    a {
+      text-decoration: none;
+      color: brown;
+    }
+  
+    span {
+      color: brown;
+    }
+  }

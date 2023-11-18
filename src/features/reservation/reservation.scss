@@ -1,0 +1,124 @@
+.infoPagina {
+  padding-left: 20%;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  background-color: rgba(128, 128, 128, 0.614);
+  align-items: center;
+  border-radius: 20px;
+  margin-top: -40px;
+  height: 50px;
+
+  a {
+    text-decoration: none;
+    color: brown;
+  }
+
+  span {
+    color: brown;
+  }
+}
+
+.reservationPage {
+  min-height: 100vh;
+  background-image: url("../images/imagineRezervare.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.reservation-form {
+  background: linear-gradient(to right, #a52a2a, black);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  margin-left: 60px;
+  margin-top: 20px;
+  padding: 40px;
+  flex-direction: column;
+  color: #fff;
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    font-size: 18px;
+
+    input,
+    select {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 8px;
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: background-color 0.3s ease;
+
+      &:focus {
+        background-color: #fff;
+      }
+
+      &::placeholder {
+        color: #333;
+      }
+    }
+  }
+
+  button {
+    background-color: #fff;
+    color: #a52a2a;
+    padding: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: black;
+      color: #fff;
+    }
+  }
+}
+
+.footerRezervation {
+  background-image: url("../images/bkFooter.jpg");
+  background-color: #333;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+  font-size: 20px;
+  display: flex;
+  align-items:center;
+  justify-content: space-around;
+  margin: 0;
+  margin-top: 100px;
+  padding: 0 20px;
+  border-radius: 25px 65px;
+  color: white;
+}
+
+.footerRezervation-item {
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footerRezervation-item:hover {
+  background-color: #a52a2a; /* Brown color */
+  color: white;
+}
+

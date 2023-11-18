@@ -5,21 +5,12 @@ import { Link } from "react-router-dom";
 export const Header = () => (
 
   <div>
-    {/* <div id="infoTop">
-      <h4>
-        <i className="fa fa-map-location-dot"></i> Str. Gheorghe Șincai 15, Baia
-        Mare
-      </h4>
-      <h4>
-        <i className="fa fa-phone"></i> 074 592 4437 <span>(rezervare)</span>-intre:
-        9:00-00:00
-      </h4>
-      <h4>
-        <i className="fa fa-phone"></i> 074 592 3346 <span>(evenimente)</span>
-        -intre: 9:00-00:00
-      </h4>
-    </div> */}
-    <nav>
+    <div className="infoTop">
+        <h4><i className="fa fa-map-location-dot"></i> Str. Gheorghe Șincai 15, Baia Mare</h4>
+        <h4><i className="fa fa-phone"></i> 074 592 4437 <span>(rezervare)</span>-intre: 9:00-00:00</h4>
+        <h4><i className="fa fa-phone"></i> 074 592 3346 <span>(evenimente)</span>-intre: 9:00-00:00</h4>
+    </div>
+    <nav className="navbar">
       <h2 className="nume">
         Butoiasu' Cu <span>Bere</span>
       </h2>
@@ -41,7 +32,6 @@ export const Header = () => (
         </Link>
       </ul>
     </nav>
-    
   </div>
 );
 export { Link };
