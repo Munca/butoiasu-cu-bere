@@ -1,7 +1,7 @@
 // EventsPage.tsx
 import React from "react";
 import "./events.scss";
-import imagineEveniment from "../images/evenimenteRevelion.png";
+import imagineEveniment from "../../assets/images/evenimenteRevelion.png";
 
 const Events = () => {
   const events = [

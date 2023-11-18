@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import "./home.scss";
-import imagineRezervare from "../images/imagineRezervare.jpg";
-import imagineMeniu from "../images/imagineMeniu.jpg";
-import imagineEvenimente from "../images/imagineEvenimente.jpg";
+import imagineRezervare from "../../assets/images/imagineRezervare.jpg";
+import imagineMeniu from "../../assets/images/imagineMeniu.jpg";
+import imagineEvenimente from "../../assets/images/imagineEvenimente.jpg";
 
 const Home = () => {
   return (
