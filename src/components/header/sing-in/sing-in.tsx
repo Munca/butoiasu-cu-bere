@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./sing-in.scss";
 import { signInUserWithEmailAndPassword } from "../../../firebase/firebase.utils";
 import { useNavigate } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { setCurrentUser } from "../../../features/authentication/user.slice";
 interface SignInValues {
   email: string;
   password: string;
@@ -16,6 +18,8 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState<SignInValues>(defaultFormValues);
   const { email, password } = formFields;
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state)=> state.user.currentUser)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

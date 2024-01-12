@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./reservation.scss";
+import TextField from "@mui/material/TextField";
 
 const Reservation = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const Reservation = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -35,7 +36,7 @@ const Reservation = () => {
         </div>
 
         <form className="reservation-form" onSubmit={handleSubmit}>
-          <label>
+          {/* <label>
             Nume:
             <input
               type="text"
@@ -44,53 +45,76 @@ const Reservation = () => {
               onChange={handleChange}
               required
             />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Telefon:
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Dată:
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Ora:
-            <input
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              required
-            />
-          </label>
+          </label> */}
+           <TextField
+            className="test"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={(e) => handleChange(e)}
+            variant="standard"
+            color="warning"
+            label="Nume"
+            required
+            fullWidth
+          />
+          <TextField
+            className="test"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) => handleChange(e)}
+            variant="standard"
+            color="warning"
+            label="Email"
+            required
+            fullWidth
+          />
+
+          <TextField
+            className="test"
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={(e) => handleChange(e)}
+            variant="standard"
+            color="warning"
+            label="Telefon"
+            required
+            fullWidth
+          />
+
+          <TextField
+            className="test"
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={(e) => handleChange(e)}
+            variant="standard"
+            color="warning"
+            label="Dată"
+            required
+            fullWidth
+          />
+
+          <TextField
+            className="test"
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={(e) => handleChange(e)}
+            variant="standard"
+            color="warning"
+            label="Ora"
+            required
+            fullWidth
+          />
           <label>
             Număr de persoane:
             <select
               name="guests"
               value={formData.guests}
-              onChange={handleChange}
+              onChange={(e) => handleChange}
             >
               {[...Array(10)].map((_, index) => (
                 <option key={index + 1} value={index + 1}>
@@ -101,7 +125,7 @@ const Reservation = () => {
           </label>
           <button type="submit">Rezervă acum</button>
         </form>
-
+        {/* extract in another component  */}
         <div className="footerRezervation">
           <div className="footerRezervation-item">
             <p>Sunati Acum: 074 592 4437 - informatii</p>
