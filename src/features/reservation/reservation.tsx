@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import "./reservation.scss";
 import TextField from "@mui/material/TextField";
+import { createReservation, getReservations } from "../../firebase/reservation/reservation.firebase.utils";
+import { ReservationData } from "../../models/reservation.model";
+import { useAppSelector } from "../../app/hooks";
+import { Button } from "@mui/material";
 
 const Reservation = () => {
-  const [formData, setFormData] = useState({
+const defaultFormFields: ReservationData = {
+  id: "",
     name: "",
     email: "",
     phone: "",
     date: "",
-    time: "",
+    hour: "",
     guests: 1,
-  });
+}
+  const [formData, setFormData] = useState<ReservationData>(defaultFormFields);
+
+  const currentUser = useAppSelector((state)=> state.user.currentUser)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,10 +27,11 @@ const Reservation = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aici poți adăuga logica pentru trimiterea datelor către server sau gestionarea lor în alt mod
-    console.log("Formularul a fost trimis:", formData);
+    if(currentUser?.id)
+    await createReservation(formData, currentUser?.id );
+    setFormData(defaultFormFields)
   };
 
   return (
@@ -36,16 +45,6 @@ const Reservation = () => {
         </div>
 
         <form className="reservation-form" onSubmit={handleSubmit}>
-          {/* <label>
-            Nume:
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </label> */}
            <TextField
             className="test"
             type="text"
@@ -99,9 +98,9 @@ const Reservation = () => {
 
           <TextField
             className="test"
-            type="time"
-            name="time"
-            value={formData.time}
+            type="hour"
+            name="hour"
+            value={formData.hour}
             onChange={(e) => handleChange(e)}
             variant="standard"
             color="warning"
@@ -125,6 +124,7 @@ const Reservation = () => {
           </label>
           <button type="submit">Rezervă acum</button>
         </form>
+                <Button onClick={()=> getReservations(currentUser?.id || "")}>Reservare</Button>
         {/* extract in another component  */}
         <div className="footerRezervation">
           <div className="footerRezervation-item">
