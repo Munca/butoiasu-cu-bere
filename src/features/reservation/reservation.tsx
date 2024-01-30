@@ -1,27 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./reservation.scss";
-import TextField from "@mui/material/TextField";
-import { createReservation, getReservations } from "../../firebase/reservation/reservation.firebase.utils";
+import emailjs from "@emailjs/browser";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { v4 as uuid } from "uuid";
+import { Button, Select, FormControl, FormLabel, Box } from "@chakra-ui/react";
+import {
+  createReservation,
+  getReservations,
+} from "../../firebase/reservation/reservation.firebase.utils";
+import dayjs from "dayjs";
 import { ReservationData } from "../../models/reservation.model";
-import { useAppSelector } from "../../app/hooks";
-import { Button } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import FutureReservation from "../../components/future-reservation/future-reservation";
+import { addReservationToState, fetchReservations } from "./reservation.slice";
+import { Input } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Reservation = () => {
-const defaultFormFields: ReservationData = {
-  id: "",
+  const defaultFormFields: ReservationData = {
+    id: "",
     name: "",
     email: "",
     phone: "",
     date: "",
     hour: "",
     guests: 1,
-}
+  };
   const [formData, setFormData] = useState<ReservationData>(defaultFormFields);
-
-  const currentUser = useAppSelector((state)=> state.user.currentUser)
-
+  const dispatch = useAppDispatch();
+  const reservations = useAppSelector(
+    (state) => state.reservation.reservations
+  );
+  const generatedId = uuid();
+  const options = Array.from({ length: 10 }, (_, index) => index + 1);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const templateParams = {
+    to_email: currentUser && currentUser?.email,
+    to_name: formData.name,
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    date: formData.date,
+    hour: formData.hour,
+    guests: formData.guests,
+  };
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -29,116 +59,137 @@ const defaultFormFields: ReservationData = {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(currentUser?.id)
-    await createReservation(formData, currentUser?.id );
-    setFormData(defaultFormFields)
+    if (currentUser?.id) {
+      try {
+        await createReservation(
+          { ...formData, id: generatedId },
+          currentUser?.id
+        );
+        dispatch(addReservationToState({ ...formData, id: generatedId }));
+        await emailjs.send(
+          "service_ywcywjn",
+          "template_ro0q3ij",
+          templateParams,
+          "Lh6Pn5n2D9d-fQAJP"
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    setFormData(defaultFormFields);
+  };
+  const fetchUserReservations = async () => {
+    try {
+      if (!currentUser?.id) return;
+      const reservations = await getReservations(currentUser.id);
+      dispatch(fetchReservations(reservations));
+    } catch (error) {
+      // Handle error, if needed
+      console.error("Error fetching reservations:", error);
+    }
   };
 
+  useEffect(() => {
+    fetchUserReservations();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, dispatch]);
+
   return (
-    <div>
-      <div className="reservationPage">
-        <div className="infoPagina">
-          <p>
-            Acasa&nbsp;{">"}
-            <span>{">"}&nbsp;Rezervare</span>
-          </p>
+    <Box>
+      <Box className="reservationPage">
+        <div className="reservation-body">
+          <form className="reservation-form" onSubmit={handleSubmit}>
+            <FormControl mb={4} className="form-group">
+              <FormLabel>Nume</FormLabel>
+              <Input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={(e) => handleChange(e)}
+                fullWidth
+                required
+              />
+            </FormControl>
+            <FormControl mb={4} className="form-group">
+              <FormLabel>Telefon</FormLabel>
+              <Input
+                type="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={(e) => handleChange(e)}
+                fullWidth
+                required
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Data rezervarii</FormLabel>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    className="time-picker"
+                    minDate={dayjs()}
+                    format="DD/MM/YYYY"
+                    value={dayjs(formData.date)}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        date: dayjs(e).format("DD/MM/YYYY"),
+                      })
+                    }
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Ora</FormLabel>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["TimePicker"]}>
+                  <TimePicker
+                    value={formData.hour}
+                    format="HH:mm"
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        hour: dayjs(e).format("HH:mm"),
+                      })
+                    }
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      seconds: renderTimeViewClock,
+                    }}
+                    className="time-picker"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </FormControl>
+            <FormControl mb={4} className="form-group">
+              <FormLabel>Număr de persoane</FormLabel>
+              <Select
+                name="guests"
+                className="select"
+                value={formData.guests}
+                onChange={(e) => handleChange(e)}
+                variant="outline"
+                colorScheme="warning"
+                style={{ width: "100%" }}
+              >
+                {options.map((number) => (
+                  <option key={number} value={number}>
+                    {number}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            <Button className="reservation-button" type="submit">
+              Rezervă acum
+            </Button>
+          </form>
+          <FutureReservation reservations={reservations}></FutureReservation>
         </div>
-
-        <form className="reservation-form" onSubmit={handleSubmit}>
-           <TextField
-            className="test"
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={(e) => handleChange(e)}
-            variant="standard"
-            color="warning"
-            label="Nume"
-            required
-            fullWidth
-          />
-          <TextField
-            className="test"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={(e) => handleChange(e)}
-            variant="standard"
-            color="warning"
-            label="Email"
-            required
-            fullWidth
-          />
-
-          <TextField
-            className="test"
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={(e) => handleChange(e)}
-            variant="standard"
-            color="warning"
-            label="Telefon"
-            required
-            fullWidth
-          />
-
-          <TextField
-            className="test"
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={(e) => handleChange(e)}
-            variant="standard"
-            color="warning"
-            label="Dată"
-            required
-            fullWidth
-          />
-
-          <TextField
-            className="test"
-            type="hour"
-            name="hour"
-            value={formData.hour}
-            onChange={(e) => handleChange(e)}
-            variant="standard"
-            color="warning"
-            label="Ora"
-            required
-            fullWidth
-          />
-          <label>
-            Număr de persoane:
-            <select
-              name="guests"
-              value={formData.guests}
-              onChange={(e) => handleChange}
-            >
-              {[...Array(10)].map((_, index) => (
-                <option key={index + 1} value={index + 1}>
-                  {index + 1}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button type="submit">Rezervă acum</button>
-        </form>
-                <Button onClick={()=> getReservations(currentUser?.id || "")}>Reservare</Button>
-        {/* extract in another component  */}
-        <div className="footerRezervation">
-          <div className="footerRezervation-item">
-            <p>Sunati Acum: 074 592 4437 - informatii</p>
-          </div>
-          <div className="footerRezervation-item">
-            <p>Orar: intre 9:00-00:00</p>
-          </div>
-          <div className="footerRezervation-item">
-            <p>Rezervari: 074 592 3346 - intre 9:00-21:00</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

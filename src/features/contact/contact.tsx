@@ -1,67 +1,71 @@
 import React from "react";
+import {
+  Box,
+  Heading,
+  Text,
+  Input,
+  Textarea,
+  Button,
+  VStack,
+  HStack,
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
 import "./contact.scss";
 
 const Contact = () => {
   return (
-    <div>
-      <div className="contact-page">
-        <div className="infoPagina">
-          <p>
-            Acasa&nbsp;{">"}
-            <span>{">"}&nbsp;Contacte</span>
-          </p>
-        </div>
-        <h1>Contactează-ne</h1>
-        <div className="contact-info">
-          <div>
-            <h2>Adresă</h2>
-            <p>Str. Gheorghe Șincai 15, Baia Mare</p>
-          </div>
-          <div>
-            <h2>Telefon</h2>
-            <p>074 592 4437</p>
-          </div>
-          <div>
-            <h2>Email</h2>
-            <p>butoiasucubere@yahoo.com</p>
-          </div>
-        </div>
+    <Box className="contact-page">
+      <Heading className="heading">Contactează-ne</Heading>
+      <HStack spacing={4} align="start" className="contact-info">
+        <Box>
+          <Heading as="h2">Adresă</Heading>
+          <Text as="p">Str. Gheorghe Șincai 15, Baia Mare</Text>
+        </Box>
+        <Box>
+          <Heading as="h2">Telefon</Heading>
+          <Text as="p">074 592 4437</Text>
+        </Box>
+        <Box>
+          <Heading as="h2">Email</Heading>
+          <Text as="p">butoiasucubere@yahoo.com</Text>
+        </Box>
+      </HStack>
 
-        <div className="contact-form">
-          <h2>Trimite-ne un mesaj</h2>
-          <form>
-            <label>
-              Nume:
-              <input type="text" placeholder="Numele tău" />
-            </label>
-            <label>
-              Email:
-              <input type="email" placeholder="Adresa ta de email" />
-            </label>
-            <label>
-              Mesaj:
-              <textarea
+      <Box className="contact-form">
+        <Heading as="h2">Trimite-ne un mesaj</Heading>
+        <form>
+          <VStack spacing={4} align="start">
+            <FormControl className="form-control">
+              <FormLabel className="label">Nume:</FormLabel>
+              <Input className="input" type="text" placeholder="Numele tău" />
+            </FormControl>
+
+            <FormControl className="form-control">
+              <FormLabel className="label">Email:</FormLabel>
+              <Input
+                className="input"
+                type="email"
+                placeholder="Adresa ta de email"
+              />
+            </FormControl>
+
+            <FormControl className="form-control">
+              <FormLabel className="label">Mesaj:</FormLabel>
+              <Textarea
+                className="textarea"
                 rows={5}
                 placeholder="Scrie mesajul tău aici"
-              ></textarea>
-            </label>
-            <button type="submit">Trimite</button>
-          </form>
-        </div>
-      </div>
+              />
+            </FormControl>
 
-      {/* <div className="footerContact">
-        <div className="footerContact-item">
-          <p>Sunati Acum: 074 592 4437 - informatii</p>
-        </div>
-        <div className="footerContact-item">
-          <p>Orar: intre 9:00-00:00</p>
-        </div>
-        <div className="footerContact-item">
-          <p>Rezervari: 074 592 3346 - intre 9:00-21:00</p>
-        </div>
-      </div> */}
-    </div>
+            <Button className="submit-button" type="submit">
+              Trimite
+            </Button>
+          </VStack>
+        </form>
+      </Box>
+    </Box>
   );
 };
 

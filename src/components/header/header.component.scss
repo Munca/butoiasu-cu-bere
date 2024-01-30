@@ -1,23 +1,11 @@
-.header-wrapper{
-    position: sticky;
-    top:0;
+.header-wrapper {
+  position: sticky;
+  top: 0;
 }
-
-.infoTop {
-  display: flex;
-  justify-content: space-evenly;
-  background-color: gray;
+.link-home {
+  font-size: 25px;
+  text-decoration: none;
 }
-
-.infoTop h4 {
-  margin: 0 auto;
-  padding: 10px 0;
-}
-
-.infoTop span {
-  color: brown;
-}
-
 .navbar {
   display: flex;
   align-items: center;

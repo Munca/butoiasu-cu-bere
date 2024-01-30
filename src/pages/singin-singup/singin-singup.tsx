@@ -1,16 +1,15 @@
-import React from 'react'
-import SingIn from '../../components/header/sing-in/sing-in'
-import SingUp from '../../components/header/sing-up/sing-up'
-import "./singin-singup.scss"
-
+import React from "react";
+import SingIn from "../../components/sing-in/sing-in";
+import SingUp from "../../components/sing-up/sing-up";
+import "./singin-singup.scss";
 
 function AuthenticationPage() {
   return (
-    <div className='singin-singup'>
+    <div className="singin-singup">
       <SingIn></SingIn>
       <SingUp></SingUp>
     </div>
-  )
+  );
 }
-  
-  export default AuthenticationPage
+
+export default AuthenticationPage;

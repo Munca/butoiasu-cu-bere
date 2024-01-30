@@ -1,24 +1,3 @@
-.infoPagina {
-  padding-left: 20%;
-  text-transform: uppercase;
-  font-weight: bold;
-  display: flex;
-  background-color: rgba(128, 128, 128, 0.614);
-  align-items: center;
-  border-radius: 20px;
-  margin-top: -40px;
-  height: 50px;
-
-  a {
-    text-decoration: none;
-    color: brown;
-  }
-
-  span {
-    color: brown;
-  }
-}
-
 .reservationPage {
   min-height: 100vh;
   background-image: url("../../assets/images/imagineRezervare.jpg");
@@ -32,23 +11,49 @@
   text-align: center;
 }
 
+.reservation-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+}
+
 .reservation-form {
-  background: linear-gradient(to right, #a52a2a, black);
+  flex: 1;
+  background-color: #343541;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
-  margin-left: 60px;
+  max-width: 500px;
+
   margin-top: 20px;
   padding: 40px;
   flex-direction: column;
-  color: #fff;
+  color: #d6d7d9;
 
   h2 {
     font-size: 28px;
     margin-bottom: 20px;
   }
 
-  label {
+  .css-1hhziy4-MuiInputBase-root-MuiInput-root {
+    position: static;
+  }
+  .css-1hhziy4-MuiInputBase-root-MuiInput-root::before {
+    border: 0 !important;
+
+    &:focus {
+      border: 0 !important;
+    }
+  }
+  .css-1hhziy4-MuiInputBase-root-MuiInput-root::after {
+    border: 0 !important;
+  }
+  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input::after {
+    border: 0 !important;
+  }
+  .form-group {
     display: block;
     width: 100%;
     margin: 15px 0;
@@ -56,46 +61,43 @@
 
     input,
     select {
-      width: 100%;
       padding: 15px;
       font-size: 16px;
       border: none;
       border-radius: 8px;
       margin-top: 8px;
-      background-color: rgba(255, 255, 255, 0.8);
-      transition: background-color 0.3s ease;
-
-      &:focus {
-        background-color: #fff;
-      }
-
-      &::placeholder {
-        color: #333;
-      }
+      background-color: #d6d7d9;
     }
   }
-
-  .test{
+  .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-width: 0px;
+    &:focus {
+      border-width: 0px;
+    }
+  }
+  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 0;
+  }
+  .time-picker {
     width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 8px;
-      background-color: rgba(255, 255, 255, 0.8);
-      transition: background-color 0.3s ease;
-      z-index: 0!important;
-
-      &:focus {
-        background-color: #fff;
-      }
-
-      &::placeholder {
-        color: #333;
-      }
+    padding: 15px;
+    font-size: 16px;
+    border: none !important;
+    border-radius: 8px;
+    margin-top: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.3s ease;
   }
 
-  button {
+  .chakra-select__icon-wrapper,
+  .css-162mkon {
+    display: none !important;
+  }
+  .css-42b2qy {
+    width: 100% !important;
+  }
+
+  .reservation-button {
     background-color: #fff;
     color: #a52a2a;
     padding: 18px;
@@ -121,7 +123,7 @@
   height: 100px;
   font-size: 20px;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-around;
   margin: 0;
   margin-top: 100px;
@@ -141,4 +143,3 @@
   background-color: #a52a2a; /* Brown color */
   color: white;
 }
-

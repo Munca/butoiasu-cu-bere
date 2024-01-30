@@ -4,6 +4,7 @@ import "./home.scss";
 import imagineRezervare from "../../assets/images/imagineRezervare.jpg";
 import imagineMeniu from "../../assets/images/imagineMeniu.jpg";
 import imagineEvenimente from "../../assets/images/imagineEvenimente.jpg";
+// import {} from 'chakr';
 
 const Home = () => {
   return (
@@ -11,23 +12,35 @@ const Home = () => {
       <div className="intro">
         <h1>Bine ati venit!</h1>
         <p>
-          Butoiașu' cu Bere a ramas si va ramane. Aici pulseaza viata! Local
-          emblematic indragit de baimareni
+          Butoiașu' cu Bere a rămas și va rămâne. Aici pulsează viața! Local
+          emblematic îndrăgit de băimăreni.
         </p>
       </div>
 
       <div className="locatie">
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingBottom: "20px",
+          }}
+        >
           <h2>Localizare</h2>
           <p>
-            Restaurant Butoiasu Cu' Bere este situat langa Centrul Vechi al Baii
-            Mari, aproape de multe alte atractii baimarene.Pentru a afla locatia
-            exacta a restaurantului, dati click pe butonul de Locatie.
+            Restaurant Butoiașu Cu' Bere este situat lângă Centrul Vechi al
+            Baiei Mari, aproape de multe alte atracții băimărene. Pentru a afla
+            locația exactă a restaurantului, dați click pe butonul de Locație.
           </p>
+          <iframe
+            title="localizare"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.32036605377!2d23.57654431559674!3d47.65877247918809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4737dc65e2933df7%3A0xdf50fff22047c116!2sButoiașu&#39;%20cu%20Bere!5e0!3m2!1sro!2sro!4v1677495428492!5m2!1sro!2sro"
+            width="900px"
+            height="500px"
+            style={{ border: 0 }}
+            loading="lazy"
+          ></iframe>
         </div>
-        <a href="/contact">
-          <i className="fa fa-location-dot"></i> Locatie
-        </a>
       </div>
 
       <div className="rezervare">
@@ -37,30 +50,14 @@ const Home = () => {
         <div>
           <h2>Rezervare</h2>
           <p>
-            Pentru o masa delicioasa va incurajam sa faceti din timp o rezervare
-            la restaurantul nostru. Acesta dispune de un loc interior amenajat
-            intr-un stil vintage si modern, dar si de o terasa frumoasa
-            amenajata in aer liber.
+            Pentru o masă delicioasă, vă încurajăm să faceți din timp o
+            rezervare la restaurantul nostru. Acesta dispune de un loc interior
+            amenajat într-un stil vintage și modern, dar și de o terasă frumoasă
+            amenajată în aer liber.
           </p>
           <a href="/reservation">
             <i className="fa fa-flag"></i> Rezervare
           </a>
-        </div>
-      </div>
-
-      <div className="facilitati">
-        <h2>Facilitati</h2>
-        <div className="facility-item">
-          {/* <FontAwesomeIcon icon={faWifi} className="icon" /> */}
-          <p>Wifi Gratuit!</p>
-        </div>
-        <div className="facility-item">
-          {/* <FontAwesomeIcon icon={faCar} className="icon" /> */}
-          <p>Locuri De Parcare!</p>
-        </div>
-        <div className="facility-item">
-          {/* <FontAwesomeIcon icon={faChild} className="icon" /> */}
-          <p>Spatiu De Joaca!</p>
         </div>
       </div>
 
@@ -73,9 +70,6 @@ const Home = () => {
             fiind disponibile atat zi de zi cat si pentru evenimente speciale
             organizate in cadrul pensiunii.
           </p>
-          <a href="/menu">
-            <i className="fa fa-utensils"></i> Meniu
-          </a>
         </div>
         <img src={imagineMeniu} alt="Imagine Meniu"></img>
       </div>
@@ -95,7 +89,7 @@ const Home = () => {
           </a>
         </div>
       </div>
-      
+
       <div className="footerHome">
         <div className="footerHome-item">
           <p>Sunati Acum: 074 592 4437 - informatii</p>

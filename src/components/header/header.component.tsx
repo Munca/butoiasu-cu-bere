@@ -4,39 +4,24 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { signOutUser } from "../../firebase/firebase.utils";
 import { setCurrentUser } from "../../features/authentication/user.slice";
+import InfoTop from "../info-top/info-top.component";
 
 export const Header = () => {
   const user = useAppSelector((state) => state.user.currentUser);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const handleSignOut = async()=>{
-   await signOutUser()
-   dispatch(setCurrentUser(null))
-  }
+  const handleSignOut = async () => {
+    await signOutUser();
+    dispatch(setCurrentUser(null));
+  };
   return (
     <div className="header-wrapper">
-      <div className="infoTop">
-        <h4>
-          <i className="fa fa-map-location-dot"></i> Str. Gheorghe Șincai 15,
-          Baia Mare
-        </h4>
-        <h4>
-          <i className="fa fa-phone"></i> 074 592 4437 <span>(rezervare)</span>
-          -intre: 9:00-00:00
-        </h4>
-        <h4>
-          <i className="fa fa-phone"></i> 074 592 3346 <span>(evenimente)</span>
-          -intre: 9:00-00:00
-        </h4>
-      </div>
+      <InfoTop />
       <div className="navbar">
-        <h2 className="title">
+        <Link to="/" className="title link-home">
           Butoiasu' Cu <span>Bere</span>
-        </h2>
+        </Link>
         <ul>
-          <Link to="/" className="link">
-            Acasa
-          </Link>
           <Link to="/menu" className="link">
             Meniu
           </Link>
@@ -54,7 +39,9 @@ export const Header = () => {
               Autentificare
             </Link>
           ) : (
-            <div className="link" onClick={()=> handleSignOut()}>Deconectare</div>
+            <div className="link" onClick={() => handleSignOut()}>
+              Deconectare
+            </div>
           )}
         </ul>
       </div>

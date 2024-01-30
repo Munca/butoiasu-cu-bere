@@ -8,25 +8,34 @@ import Reservation from "./features/reservation/reservation";
 import Contact from "./features/contact/contact";
 import Events from "./features/events/events";
 import AuthenticationPage from "./pages/singin-singup/singin-singup";
-import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./firebase/firebase.utils";
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from "./firebase/firebase.utils";
 import { User } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { setCurrentUser } from "./features/authentication/user.slice";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state)=> state.user.currentUser)
+  const user = useAppSelector((state) => state.user.currentUser);
 
-useEffect(()=> {
-  const unsubscribe = onAuthStateChangedListener((user: User)=>{
-    if(user){
-      createUserDocumentFromAuth(user);
-    }
-    dispatch(setCurrentUser({email: user.email, displayName: user.displayName, id: user.uid}))
-  })
-  return unsubscribe;
-}, [dispatch])
-  return (     
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user: User) => {
+      if (user) {
+        createUserDocumentFromAuth(user);
+      }
+      dispatch(
+        setCurrentUser({
+          email: user?.email,
+          displayName: user?.displayName,
+          id: user?.uid,
+        })
+      );
+    });
+    return unsubscribe;
+  }, [dispatch]);
+  return (
     <div>
       <Header />
       <Routes>
@@ -35,8 +44,7 @@ useEffect(()=> {
         <Route path="/reservation" Component={Reservation}></Route>
         <Route path="/events" Component={Events}></Route>
         <Route path="/contact" Component={Contact}></Route>
-        {!user && <Route path="/auth" Component={AuthenticationPage}></Route> }
-        
+        {!user && <Route path="/auth" Component={AuthenticationPage}></Route>}
       </Routes>
     </div>
   );

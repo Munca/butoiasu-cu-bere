@@ -1,0 +1,75 @@
+.future-reservation-card {
+  background-color: #343541;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  padding: 40px 0;
+  -family: "Arial", sans-serif;
+  transition: transform 0.3s ease-in-out;
+}
+
+.future-reservation-card-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.future-reservation-card-list {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+  color: #2b2a4c;
+}
+.reservation-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.future-reservation-list-item {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.future-reservation-list-item:hover {
+  background-color: #dadae4;
+}
+
+.reservation-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.edit-delete-icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./sing-up.scss";
-import { DefaultRegisterValues } from "../../../models/auth.models";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../../firebase/firebase.utils";
+import { DefaultRegisterValues } from "../../models/auth.models";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../firebase/firebase.utils";
 import { useNavigate } from "react-router";
 
 const SignUp = () => {
-
   const defaultFormFields: DefaultRegisterValues = {
     displayName: "",
     email: "",
@@ -17,7 +19,7 @@ const SignUp = () => {
 
   const [formFields, setFormFields] =
     useState<DefaultRegisterValues>(defaultFormFields);
-    //destructuring 
+  //destructuring
   const { displayName, email, password, confirmPassword } = formFields;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,9 +40,9 @@ const SignUp = () => {
     }
 
     try {
-     const user =  await createAuthUserWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth(user, displayName );
-      navigate('/');
+      const user = await createAuthUserWithEmailAndPassword(email, password);
+      await createUserDocumentFromAuth(user, displayName);
+      navigate("/");
       resetFormFields();
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
@@ -96,9 +98,7 @@ const SignUp = () => {
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <button type="submit" >
-          Înregistrare
-        </button>
+        <button type="submit">Înregistrare</button>
       </form>
     </div>
   );
