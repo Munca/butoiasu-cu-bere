@@ -6,8 +6,10 @@ import "./singin-singup.scss";
 function AuthenticationPage() {
   return (
     <div className="singin-singup">
-      <SingIn></SingIn>
-      <SingUp></SingUp>
+      <div className="auth-container">
+        <SingIn></SingIn>
+        <SingUp></SingUp>
+      </div>
     </div>
   );
 }

@@ -131,6 +131,7 @@ function FutureReservation({ reservations }: Props) {
                 <Box className="edit-delete-icons">
                   <EditIcon
                     boxSize={26}
+                    
                     paddingRight={16}
                     onClick={() => handleEdit(reservation)}
                   />

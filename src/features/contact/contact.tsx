@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -12,8 +12,49 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import "./contact.scss";
+import emailjs from "@emailjs/browser";
+
+interface ContactData {
+  email: string;
+  name: string;
+  message: string;
+}
 
 const Contact = () => {
+  const defaultFormFields: ContactData = {
+    email: "",
+    name: "",
+    message: "",
+  };
+  const [formData, setFormData] = useState<ContactData>(defaultFormFields);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const templateParams = {
+    from_name: formData.name, 
+    message: formData.message,
+  };
+  const sendEmailContact = async () => {
+    try {
+      await emailjs.send(
+        "service_ywcywjn",
+        "template_i2tjeu4",
+        templateParams,
+        "Lh6Pn5n2D9d-fQAJP"
+      );
+      setFormData(defaultFormFields)
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+
   return (
     <Box className="contact-page">
       <Heading className="heading">Contactează-ne</Heading>
@@ -34,11 +75,18 @@ const Contact = () => {
 
       <Box className="contact-form">
         <Heading as="h2">Trimite-ne un mesaj</Heading>
-        <form>
+        <form onSubmit={() => sendEmailContact()}>
           <VStack spacing={4} align="start">
             <FormControl className="form-control">
               <FormLabel className="label">Nume:</FormLabel>
-              <Input className="input" type="text" placeholder="Numele tău" />
+              <Input
+                className="input"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={(e) => handleChange(e)}
+                placeholder="Numele tău"
+              />
             </FormControl>
 
             <FormControl className="form-control">
@@ -46,6 +94,9 @@ const Contact = () => {
               <Input
                 className="input"
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={(e) => handleChange(e)}
                 placeholder="Adresa ta de email"
               />
             </FormControl>
@@ -54,6 +105,9 @@ const Contact = () => {
               <FormLabel className="label">Mesaj:</FormLabel>
               <Textarea
                 className="textarea"
+                name="message"
+                value={formData.message}
+                onChange={(e) => handleChange(e)}
                 rows={5}
                 placeholder="Scrie mesajul tău aici"
               />

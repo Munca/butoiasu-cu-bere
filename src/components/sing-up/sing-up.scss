@@ -1,39 +1,46 @@
-/* sing-up.scss */
-
 .sign-up {
   max-width: 300px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: rgba(0, 0, 0, 0.447); 
+  border: 1px solid rgba(0, 0, 0, 0.447);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 
 .sign-up h2 {
   text-align: center;
-  color: #333;
+  color: #fff!important;
 }
 
 .sign-up label {
   display: block;
   margin: 15px 0;
   font-size: 16px;
+  color: #fff;
 }
 
 .sign-up input {
   width: 100%;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.532); 
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.644)!important; 
+    outline: none;
+  }
 }
 
 .sign-up button {
   width: 100%;
   padding: 10px;
-  background-color: #008cba;
+  background-color: rgba(58, 42, 165, 0.596);
   color: #fff;
   font-size: 16px;
   border: none;
@@ -43,5 +50,5 @@
 }
 
 .sign-up button:hover {
-  background-color: #005a80;
+  background-color: rgb(31, 31, 213);
 }

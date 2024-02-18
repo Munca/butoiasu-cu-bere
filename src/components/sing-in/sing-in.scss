@@ -2,36 +2,45 @@
   max-width: 300px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: rgba(0, 0, 0, 0.447); 
+  border: 1px solid rgba(255, 255, 255, 0.233);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 
 .sign-in h2 {
   text-align: center;
-  color: #333;
+  color: #fff;
 }
 
 .sign-in label {
   display: block;
   margin: 15px 0;
   font-size: 16px;
+  color: #fff;
 }
 
 .sign-in input {
   width: 100%;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.532); 
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.644); 
+    outline: none;
+  }
 }
 
 .sign-in button {
   width: 100%;
   padding: 10px;
-  background-color: brown;
+  background-color: rgba(165, 42, 42, 0.704);
   color: #fff;
   font-size: 16px;
   border: none;
@@ -41,6 +50,5 @@
 }
 
 .sign-in button:hover {
-  background-color:lightgoldenrodyellow;
-  color: brown;
+  background-color: brown;
 }

@@ -18,6 +18,9 @@ export const reservationSlice = createSlice({
     addReservationToState: (state, action: PayloadAction<ReservationData>) => {
       state.reservations = [...state.reservations, action.payload];
     },
+    resetReservation: (state) => {
+      state.reservations = [];
+    },
     deleteReservationFromState: (state, action: PayloadAction<string>) => {
       state.reservations = state.reservations.filter(
         (reservation) => reservation.id !== action.payload
@@ -39,5 +42,6 @@ export const {
   deleteReservationFromState,
   fetchReservations,
   updateReservationInState,
+  resetReservation,
 } = reservationSlice.actions;
 export default reservationSlice.reducer;

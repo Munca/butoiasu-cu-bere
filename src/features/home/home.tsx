@@ -1,10 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import "./home.scss";
 import imagineRezervare from "../../assets/images/imagineRezervare.jpg";
 import imagineMeniu from "../../assets/images/imagineMeniu.jpg";
 import imagineEvenimente from "../../assets/images/imagineEvenimente.jpg";
-// import {} from 'chakr';
+import { SvgIcon } from "@mui/material";
+import { Center, Icon } from "@chakra-ui/react";
+import EventSeatIcon from "@mui/icons-material/EventSeat";
+import { alignProperty } from "@mui/material/styles/cssUtils";
+import { faAlignJustify } from "@fortawesome/free-solid-svg-icons";
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const Home = () => {
   return (
@@ -56,7 +61,7 @@ const Home = () => {
             amenajată în aer liber.
           </p>
           <a href="/reservation">
-            <i className="fa fa-flag"></i> Rezervare
+            <EventSeatIcon /> Rezervare
           </a>
         </div>
       </div>
@@ -70,6 +75,9 @@ const Home = () => {
             fiind disponibile atat zi de zi cat si pentru evenimente speciale
             organizate in cadrul pensiunii.
           </p>
+          <a href="/menu">
+            <MenuBookRoundedIcon /> Meniu
+          </a>
         </div>
         <img src={imagineMeniu} alt="Imagine Meniu"></img>
       </div>
@@ -85,7 +93,7 @@ const Home = () => {
             restaurant.
           </p>
           <a href="/events">
-            <i className="fa-regular fa-calendar-days"></i> Evenimente
+            <CalendarMonthIcon /> Evenimente
           </a>
         </div>
       </div>

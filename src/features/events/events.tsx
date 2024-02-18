@@ -1,44 +1,65 @@
-// EventsPage.tsx
 import React from "react";
 import "./events.scss";
-import imagineEveniment from "../../assets/images/evenimenteRevelion.png";
+import imagineSearaConcert from "../../assets/images/imagineSearaConcert.webp";
+import searaTematica from "../../assets/images/searaTematica.jpg";
+import imagineEveniment from "../../assets/images/imagineEvenimente.jpg";
 
 const Events = () => {
-  const events = [
-    { id: 1, title: "Concert live", date: "2023-12-01" },
-    { id: 2, title: "Seara tematică", date: "2023-12-15" },
-    { id: 3, title: "Party Night", date: "2023-12-25" },
-  ];
+  const events: {
+    [key: number]: {
+      title: string;
+      date: string;
+      details: string;
+      image: string;
+    };
+  } = {
+    1: {
+      title: "Concert live",
+      date: "15-03-2024",
+      details:
+        "Concertul live de la restaurantul Butoiașul cu Bere este un eveniment cultural și muzical ce aduce în prim plan artiști locali din orașul respectiv. Atmosfera este una vibrantă și plină de energie, oferind participanților ocazia de a se bucura de muzică în direct într-un cadru relaxant și prietenos.",
+      image: imagineSearaConcert,
+    },
+    2: {
+      title: "Seara tematică",
+      date: "22-03-2024",
+      details:
+        "Seara tematică cu stand-up la restaurantul Butoiașul cu Bere este un eveniment de divertisment ce aduce în prim plan artiști locali sau naționali specializați în comedy stand-up. Atmosfera este una relaxată și plină de umor, oferind participanților o experiență distractivă și memorabilă.",
+      image: searaTematica,
+    },
+    3: {
+      title: "Party Night",
+      date: "30-03-2024",
+      details:
+        "Party Night la restaurantul Butoiașul cu Bere este un eveniment vibrant și plin de energie, care aduce în prim plan o atmosferă de petrecere și distracție pentru toți participanții. Atmosfera este una festivă și efervescentă, oferind oportunitatea de a dansa și de a socializa într-un cadru prietenos și relaxant.",
+      image: imagineEveniment,
+    },
+  };
 
   return (
     <div>
       <div className="eventsPage">
-        <div className="infoPagina">
-          <p>
-            Acasa&nbsp;{">"}
-            <span>{">"}&nbsp;Evenimente</span>
-          </p>
-        </div>
-        
-        <h1>Evenimente</h1>
+        <h1>Evenimentele Butoilui</h1>
         <div className="events-list">
-          {events.map((event) => (
-            <div key={event.id} className="event-item">
-              <div className="event-image">
-                <img src={imagineEveniment} alt="perete"></img>
+          {Object.keys(events).map((eventId: string) => {
+            const event = events[parseInt(eventId)];
+            return (
+              <div key={eventId} className="event-item">
+                <div className="event-image">
+                  <img src={event.image} alt={event.title}></img>{" "}
+                </div>
+                <div className="event-details">
+                  <h2>{event.title}</h2>
+                  <p>Data: {event.date}</p>
+                  <p>{event.details}</p>
+                </div>
               </div>
-              <div className="event-details">
-                <h2>{event.title}</h2>
-                <p>Data: {event.date}</p>
-                <p>Detalii despre eveniment</p>
-                <p></p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      <div className="footerEvents">
+      {/* <div className="footerEvents">
         <div className="footerEvents-item">
           <p>Sunati Acum: 074 592 4437 - informatii</p>
         </div>
@@ -48,7 +69,7 @@ const Events = () => {
         <div className="footerEvents-item">
           <p>Rezervari: 074 592 3346 - intre 9:00-21:00</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

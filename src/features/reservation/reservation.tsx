@@ -19,6 +19,7 @@ import FutureReservation from "../../components/future-reservation/future-reserv
 import { addReservationToState, fetchReservations } from "./reservation.slice";
 import { Input } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useNavigate } from "react-router";
 
 const Reservation = () => {
   const defaultFormFields: ReservationData = {
@@ -38,6 +39,7 @@ const Reservation = () => {
   const generatedId = uuid();
   const options = Array.from({ length: 10 }, (_, index) => index + 1);
   const currentUser = useAppSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
   const templateParams = {
     to_email: currentUser && currentUser?.email,
     to_name: formData.name,
@@ -75,6 +77,8 @@ const Reservation = () => {
       } catch (e) {
         console.log(e);
       }
+    } else{
+      navigate("/auth")
     }
 
     setFormData(defaultFormFields);
@@ -85,14 +89,13 @@ const Reservation = () => {
       const reservations = await getReservations(currentUser.id);
       dispatch(fetchReservations(reservations));
     } catch (error) {
-      // Handle error, if needed
+      
       console.error("Error fetching reservations:", error);
     }
   };
 
   useEffect(() => {
     fetchUserReservations();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, dispatch]);
 
   return (
@@ -174,6 +177,7 @@ const Reservation = () => {
                 variant="outline"
                 colorScheme="warning"
                 style={{ width: "100%" }}
+                required
               >
                 {options.map((number) => (
                   <option key={number} value={number}>
