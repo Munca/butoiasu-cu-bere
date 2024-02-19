@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/reservation" Component={Reservation}></Route>
         <Route path="/events" Component={Events}></Route>
         <Route path="/contact" Component={Contact}></Route>)
-        {!user && <Route path="/auth" Component={AuthenticationPage}></Route>}
+        {!user?.email && <Route path="/auth" Component={AuthenticationPage}></Route>}
       </Routes>
     </div>
   );

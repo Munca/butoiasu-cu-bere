@@ -36,7 +36,7 @@ export const Header = () => {
           <Link to="/contact" className="link">
             Contacte
           </Link>
-          {!user ? (
+          {!user?.email ?(
             <Link to="/auth" className="link">
               Autentificare
             </Link>
