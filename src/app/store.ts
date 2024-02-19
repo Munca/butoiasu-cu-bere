@@ -8,7 +8,7 @@ export const store = configureStore({
     user: userReducer,
     reservation: reservationReducer,
     menu: menuReducer,
-  },
+  }
 });
 
 export type AppDispatch = typeof store.dispatch;
